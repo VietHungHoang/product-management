@@ -1,4 +1,18 @@
 extends ../../layouts/default.pug
-
+include ../../mixins/box-head.pug
 block main 
-    h1 Products
+    .container.my-3 
+        .row   
+            .col-12 
+                +box-head("List Product") 
+                    
+        .row 
+            .col-4.mb-3 
+                .product-item 
+                    .inner-image 
+                        img(src="https://images.macrumors.com/t/LOfu9VLk4WvjtKmnQtzdS67Rr3w=/800x0/smart/article-new/2016/05/iphone8gold.jpg?lossy", alt="Iphone 9")
+                    .inner-content 
+                        h3.inner-title Iphone 9
+                        .inner-price-new 80$
+                        .inner-price-old 100$
+                        .inner-discount -20$
