@@ -5,13 +5,10 @@ const port = 3000;
 app.set("views", "./views")
 app.set("view engine", "pug")
 
-app.get('/', (req, res) => {
-    res.render("clients/pages/home/index");
-})
+const route = require("./routes/clients/index.route");
 
-app.get('/products', (req, res) => {
-    res.render("clients/pages/products/index");
-})
+// Routes
+route(app);
 
 app.listen(port, () => {
     console.log("Listen success on port 3000");
