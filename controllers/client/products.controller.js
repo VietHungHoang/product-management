@@ -10,6 +10,7 @@ module.exports.index = async (req, res) => {
     console.log(products);
 
     res.render("clients/pages/products/index",{
-        pageTitle: "Products"
+        pageTitle: "Products", 
+        products: products
     });
 };
