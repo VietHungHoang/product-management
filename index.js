@@ -13,6 +13,10 @@ app.set("view engine", "pug");
 
 app.use(express.static("public"));
 
+const systenConfig = require("./config/system")
+
+app.locals.prefixAdmin = systenConfig.prefixAdmin;
+
 // Routes
 routeClient(app);
 routeAdmin(app);
