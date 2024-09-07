@@ -1,8 +1,6 @@
 const Product = require("../../models/product.model");
 
 module.exports.index = async (req, res) => {
-    console.log(req.query.status);
-
     let find = {
         deleted: false
     }
