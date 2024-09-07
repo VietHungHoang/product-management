@@ -1,3 +1,13 @@
-module.exports.index = (req, res) => {
-    res.send("Products");
+const Product = require("../../models/product.model");
+
+module.exports.index = async (req, res) => {
+
+    const products = await Product.find({
+        deleted: false
+    });
+    console.log(products);
+
+    res.render("admin/pages/products/index", {
+        products: products
+    });
 };
