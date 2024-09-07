@@ -3,6 +3,19 @@ extend ../../layouts/default.pug
 block main 
     h1 Products List
 
+    .card-md-3 
+    .card-header Bộ lọc và tìm kiếm 
+    .card-body 
+        button(
+            class="btn btn-sm ml-1 btn-outline-success active"
+        ) Tất cả
+         button(
+            class="btn btn-sm ml-1 btn-outline-success"
+        ) Hoạt động
+         button(
+            class="btn btn-sm ml-1 btn-outline-success"
+        ) Không hoạt động
+
     table.table.table-hover.table-sm 
         thead 
             tr 
