@@ -2,10 +2,12 @@ const Product = require("../../models/product.model");
 
 const filterStatusHelper = require("../../helpers/filterStatus");
 const searchHepler = require("../../helpers/search");
+const paginationHelper = require("../../helpers/pagination");
 
 module.exports.index = async (req, res) => {
     const filterStatus = filterStatusHelper(req.query);
     const objectSearch = searchHepler(req.query);
+
 
     let find = {
         deleted: false
@@ -16,13 +18,23 @@ module.exports.index = async (req, res) => {
 
     // Filter following search keyword
     if(objectSearch.keyword) find.title = objectSearch.regex;
+
+    // Pagination
+    const countProducts = await Product.countDocuments(find);
+    let objectPagination = paginationHelper(
+        {
+            limitItems: 4
+        }, 
+        req.query, 
+        countProducts
+    );
     
-    const products = await Product.find(find);
-    // console.log(products);
+    const products = await Product.find(find).limit(objectPagination.limitItems).skip(objectPagination.skip);
 
     res.render("admin/pages/products/index", {
         products: products,
         filterStatus: filterStatus, 
-        keyword: objectSearch.keyword
+        keyword: objectSearch.keyword, 
+        pagination: objectPagination
     });
 };
