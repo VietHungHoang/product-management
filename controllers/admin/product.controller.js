@@ -40,7 +40,7 @@ module.exports.index = async (req, res) => {
     });
 };
 
-//[PATCH] /admin/products/change-status/status/id
+//[PATCH] /admin/products/change-status/:status/:id
 module.exports.changeStatus = async (req, res) => {
     const status = req.params.status;
     const id = req.params.id;
@@ -57,5 +57,13 @@ module.exports.changeMulti = async (req, res) => {
     if(type == "active")  await Product.updateMany({_id: {$in: ids}}, {status: "active"});
     else  await Product.updateMany({_id: {$in: ids}}, {status: "inactive"});
 
+    res.redirect("back");
+};
+
+
+//[DELETE] /admin/products/delete/:id
+module.exports.deleteItem = async (req, res) => {
+    const id = req.params.id;
+    await  Product.deleteOne({_id: id});
     res.redirect("back");
 };
