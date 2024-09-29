@@ -79,6 +79,7 @@ if (formChangeMulti) {
         const inputsChecked = checkboxMulti.querySelectorAll(
             "input[name='id']:checked"
         );
+        console.log(inputsChecked);
 
         const typeChange = e.target.elements.type.value;
         if (typeChange == "delete-all") {
@@ -89,24 +90,38 @@ if (formChangeMulti) {
         if (inputsChecked.length > 0) {
             let ids = [];
             const inputIds = formChangeMulti.querySelector("input[name='ids']");
-
+            console.log(2);
             inputsChecked.forEach((input) => {
-                const id = input.value();
-                
-
+                const id = input.value;
                 if (typeChange == "change-position") {
                     const position = input
                         .closest("tr")
                         .querySelector("input[name='position']").value;
-                        ids.push(`${id}-${position}`);
+                    ids.push(`${id}-${position}`);
                 }
                 else ids.push(id);
             });
 
+            console.log(2);
             inputIds.value = ids.join(", ");
             formChangeMulti.submit();
         } else {
             alert("Please select at least one product");
         }
+    });
+}
+
+//Show alert
+const showAlert = document.querySelector("[show-alert]");
+if(showAlert){
+    const time = parseInt(showAlert.getAttribute("data-time"));
+    const closeAlert = showAlert.querySelector("[close-alert]");
+
+    setTimeout(() => {
+        showAlert.classList.add("alert-hidden");
+    }, time);
+
+    closeAlert.addEventListener("click" , () => {
+        showAlert.classList.add("alert-hidden");
     });
 }

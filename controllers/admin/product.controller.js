@@ -47,7 +47,16 @@ module.exports.changeStatus = async (req, res) => {
     const status = req.params.status;
     const id = req.params.id;
 
+    
+
     await Product.updateOne({ _id: id }, { status: status });
+
+    
+    
+    req.flash('success', 'Update success!');
+    
+    
+
     res.redirect("back");
 };
 
@@ -56,10 +65,14 @@ module.exports.changeMulti = async (req, res) => {
     const type = req.body.type;
     const ids = req.body.ids.split(", ");
 
-    if (type == "active")
+    if (type == "active"){
         await Product.updateMany({ _id: { $in: ids } }, { status: "active" });
-    else if (type == "inactive")
+        req.flash('success', 'Update success!');
+    }
+    else if (type == "inactive"){
         await Product.updateMany({ _id: { $in: ids } }, { status: "inactive" });
+        req.flash('success', 'Update success!');
+    }
     else if (type == "delete-all")
         await Product.updateMany(
             { _id: { $in: ids } },
@@ -77,7 +90,6 @@ module.exports.changeMulti = async (req, res) => {
             });
         }
     }
-
     res.redirect("back");
 };
 
