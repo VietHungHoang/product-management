@@ -1,0 +1,106 @@
+extends ../../layouts/default.pug
+
+block main 
+    h1(class="mb-4") Add new product 
+
+    form(
+        action=`${prefixAdmin}/products/create`
+        id="form-create-product"
+        method="POST"
+    )
+        .form-group
+            label(for="title") Title 
+            input(
+                type="text"
+                class="form-control"
+                id="title"
+                name="title"
+                required
+            )
+        .form-group
+            label(for="desc") Description 
+            textarea(
+                type="text"
+                class="form-control"
+                id="desc"
+                name="description"
+                rows="5"
+            )
+        .form-group
+            label(for="price") Price 
+            input(
+                type="number"
+                class="form-control"
+                id="price"
+                name="price"
+                value="0"
+                min="0"
+            )
+        .form-group
+            label(for="discount") Discount 
+            input(
+                type="number"
+                class="form-control"
+                id="discount"
+                name="discountPercentage"
+                value="0"
+                min="0"
+            )
+        .form-group
+            label(for="stock") Stock 
+            input(
+                type="number"
+                class="form-control"
+                id="stock"
+                name="stock"
+                value="0"
+                min="0"
+            )
+        .form-group
+            label(for="thumbnail") Image 
+            input(
+                type="text"
+                class="form-control"
+                id="thumbnail"
+                name="thumbnail"
+                required
+            )
+        .form-group
+            label(for="position") Position 
+            input(
+                type="number"
+                class="form-control"
+                id="position"
+                name="position"
+                placeholder="Auto increment"
+                min="1"
+            )
+        .form-group.form-check.form-check-inline 
+            input(
+                type="radio"
+                class="form-check-input"
+                id="statusActive"
+                name="status"
+                value="active"
+                checked
+            )
+            label(for="statusActive" class="form-check-label") Active
+        
+        .form-group.form-check.form-check-inline 
+            input(
+                type="radio"
+                class="form-check-input"
+                id="statusInActive"
+                name="status"
+                value="inactive"
+                checked
+            )
+            label(for="statusInActive" class="form-check-label") In active
+        
+        .form-group 
+            button(
+                type="submit"
+                class="btn btn-primary"
+            ) Create
+
+    script(scr="/admin/js/product.js")
