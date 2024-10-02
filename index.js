@@ -19,7 +19,6 @@ const routeClient = require("./routes/client/index.route");
 const routeAdmin = require("./routes/admin/index.route");
 
 
-
  
 
 database.connect();
