@@ -1,6 +1,8 @@
 extends ../../layouts/default.pug
+include ../../mixins/alert.pug
 
 block main 
+    +alert-error(5000)
     h1(class="mb-4") Add new product 
 
     form(
@@ -19,7 +21,7 @@ block main
                 required
             )
         .form-group
-            label(for="desc") Description 
+            label(for="desc") Description   
             textarea(
                 type="text"
                 class="form-control"
@@ -65,6 +67,11 @@ block main
                 id="thumbnail"
                 name="thumbnail"
                 accept="image/*"
+                upload-image-input
+            )
+            img(
+                src=""
+                upload-image-preview
             )
         .form-group
             label(for="position") Position 

@@ -5,6 +5,7 @@ const systemConfig = require("../../config/system.js");
 const filterStatusHelper = require("../../helpers/filterStatus");
 const searchHelper = require("../../helpers/search");
 const paginationHelper = require("../../helpers/pagination");
+const { response } = require("express");
 
 // [GET] /admin/products
 module.exports.index = async (req, res) => {
@@ -49,15 +50,9 @@ module.exports.changeStatus = async (req, res) => {
     const status = req.params.status;
     const id = req.params.id;
 
-    
-
     await Product.updateOne({ _id: id }, { status: status });
 
-    
-    
     req.flash('success', 'Update success!');
-    
-    
 
     res.redirect("back");
 };
@@ -117,6 +112,7 @@ module.exports.create = async (req, res) => {
 
 //[POST] /admin/products/create
 module.exports.createPost = async (req, res) => {
+    
     req.body.price=parseInt(req.body.price);
     req.body.discountPercentage=parseInt(req.body.discountPercentage);
     req.body.stock=parseInt(req.body.stock);
